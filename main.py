@@ -59,7 +59,7 @@ def alert():
     elif request.method == 'POST':
         # Append user to file
         alerts_data = request.get_json()
-        if alerts_data and 'alert' in alert_data:
+        if alerts_data and 'alert' in alerts_data:
             alert = alerts_data["alert"]
             append_to_file('alerts.txt', alert)
             return {"msg": f"alert '{alert}' saved."}
