@@ -60,7 +60,7 @@ def alert():
         # Append user to file
         alerts_data = request.get_json()
         if alerts_data and 'alert' in alert_data:
-            alert = alert_data["alert"]
+            alert = alerts_data["alert"]
             append_to_file('alerts.txt', alert)
             return {"msg": f"alert '{alert}' saved."}
         else:
