@@ -51,7 +51,7 @@ def score():
             return {"msg": "No user or score data received."}
 
 @app.route('/pepper', methods=['GET', 'POST'])
-def user():
+def alert():
     if request.method == 'GET':
         alerts = read_from_file('pepper.txt')
         truncate_file("pepper.txt")
