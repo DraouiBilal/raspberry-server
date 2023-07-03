@@ -62,7 +62,7 @@ def alert():
         alerts_data = request.get_json()
         if alerts_data and 'alert' in alerts_data:
             alert = alerts_data["alert"]
-            current_time = datetime.datetime.now.strftime("%Y-%m-%d %H:%M:%S")
+            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             append_to_file('pepper.txt', f'{current_time} {alert}')
             return {"msg": f"alert '{alert}' saved."}
         else:
