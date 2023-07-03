@@ -1,4 +1,5 @@
 from flask import Flask, request
+import datetime
 import os
 
 app = Flask(__name__)
@@ -61,7 +62,8 @@ def alert():
         alerts_data = request.get_json()
         if alerts_data and 'alert' in alerts_data:
             alert = alerts_data["alert"]
-            append_to_file('pepper.txt', alert)
+            current_time = datetime.datetime.now.strftime("%Y-%m-%d %H:%M:%S")
+            append_to_file('pepper.txt', f'{current_time} {alert}')
             return {"msg": f"alert '{alert}' saved."}
         else:
             return {"msg": "No alert received."}
