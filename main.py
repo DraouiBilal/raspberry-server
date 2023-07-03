@@ -50,6 +50,21 @@ def score():
         else:
             return {"msg": "No user or score data received."}
 
+@app.route('/pepper', methods=['GET', 'POST'])
+def user():
+    if request.method == 'GET':
+        alerts = read_from_file('pepper.txt')
+        truncate_file("pepper.txt")
+        return {"alerts": alerts}
+    elif request.method == 'POST':
+        # Append user to file
+        alerts_data = request.get_json()
+        if alerts_data and 'alert' in alert_data:
+            alert = alert_data["alert"]
+            append_to_file('alerts.txt', alert)
+            return {"msg": f"alert '{alert}' saved."}
+        else:
+            return {"msg": "No alert received."}
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host='0.0.0.0',port=5000)
