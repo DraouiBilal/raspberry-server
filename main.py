@@ -37,16 +37,17 @@ def user():
 def score():
     if request.method == 'GET':
         lines = read_from_file('score.txt')
-        score = [{"user": line.split(" ")[0], "score": int(line.split(" ")[1])} for line in lines ]
+        score = [{"user": " ".join(line.split(" ")[0].split("-")),"email": line.split(" ")[1] ,"score": int(line.split(" ")[2])} for line in lines ]
         truncate_file("score.txt")
         return {"score": score}
     elif request.method == 'POST':
         # Append user to file
         score_data = request.get_json()
-        if score_data and 'user' in score_data and 'score' in score_data:
+        if score_data and 'user' in score_data and 'email' in score_data and 'score' in score_data:
             user = score_data["user"]
             score = score_data["score"]
-            append_to_file('score.txt', f'{user} {score}')
+            email = score_data["email"]
+            append_to_file('score.txt', f'{user} {email} {score}')
             return {"msg": f"User '{user}' appended to file."}
         else:
             return {"msg": "No user or score data received."}
